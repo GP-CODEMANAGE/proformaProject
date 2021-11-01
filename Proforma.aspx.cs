@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using Spire.Xls;
+using System.Data.SqlClient;
 
 public partial class Proforma : System.Web.UI.Page
 {
@@ -54,23 +58,45 @@ public partial class Proforma : System.Web.UI.Page
         ddl.SelectedIndex = 0;
     }
 
-    protected void ddlHousehold_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        BindAllocationGroup(ddlAllocationGroup);
-    }
-
-    protected void ddlAllocationGroup_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void txtasOfDate_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
     protected void btnsubmit_Click(object sender, EventArgs e)
     {
+
+    }
+    public void generatesExcelsheets()
+    {
+       
+
+        String lsSQL = "exec [TransactionLoad_DB].[dbo].[SP_EXCEL_FORMULA_TEST]";
+        DataSet dataSet = clsDB.getDataSet(lsSQL);
+
+        exportDataSetToExcel(dataSet);
+    }
+    
+    public void exportDataSetToExcel(DataSet dataSet)
+    {
+        
+        #region Spire License Code
+        string License = AppLogic.GetParam(AppLogic.ConfigParam.SpireLicense);
+        Spire.License.LicenseProvider.SetLicenseKey(License);
+        Spire.License.LicenseProvider.LoadLicense();
+        #endregion
+
+        Workbook book = new Workbook();
+        book.Version = ExcelVersion.Version2016;
+        book.LoadFromFile(@"C:\Users\BharathKumar\Desktop\Test\Sample.xlsx");
+
+        DataTable dt = dataSet.Tables[0];
+       
+
+        for (int i = 0; i <= dt.Rows.Count - 1; i++)
+        {
+            for (int j = 0; j <= dt.Columns.Count - 1; j++)
+            {
+                var cell = dt.Rows[i][j];
+                
+            }
+        }
+
 
     }
 }

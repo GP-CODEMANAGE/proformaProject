@@ -81,7 +81,7 @@
                     </td>
                     <td style="height: 40px">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="btnsubmit" runat="server" Text="SUBMIT" OnClick="btnsubmit_Click" />
+                        <asp:Button ID="btnsubmit" runat="server" Text="GENERATE EXCEL" OnClick="btnsubmit_Click" />
                     </td>
                 </tr>
             </table>
