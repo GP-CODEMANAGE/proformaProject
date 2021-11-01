@@ -8,6 +8,16 @@
     <link id="style1" href="./common/gresham.css" rel="stylesheet" type="text/css" />
     <link href="./common/Calendar.css" rel="stylesheet" type="text/css" />
     <script src="./common/Calendar.js" type="text/javascript"></script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 1329px;
+            height: 65px;
+            margin-bottom: 0px;
+        }
+        .auto-style2 {
+            width: 1335px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -38,30 +48,39 @@
                     <td><br /></td>
                 </tr>
                 <tr>
+                <asp:ScriptManager ID="sm1" runat="server"></asp:ScriptManager>
+                    <asp:UpdatePanel ID="update1" runat="server">
+                        <ContentTemplate>
                     <td style="width: 25%; height: 25px;">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:Label ID="lblHousehold" runat="server" Text="Household:" Font-Names="Verdana"></asp:Label></td>
                     <td style="height: 25px">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:DropDownList Font-Names="Verdana" ID="ddlHousehold" runat="server" AutoPostBack="True"
-                            OnSelectedIndexChanged="ddlHousehold_SelectedIndexChanged" Width="250px">
+                            OnSelectedIndexChanged="ddlHousehold_SelectedIndexChanged" Width="300px">
                         </asp:DropDownList>
                         &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlHousehold" ErrorMessage="Select Household">*</asp:RequiredFieldValidator>
                     </td>
                     <td style="width: 4px; height: 25px"></td>
+                        </ContentTemplate>
+                  </asp:UpdatePanel>
                 </tr>
                 <tr>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
                     <td style="width: 25%; height: 25px;">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:Label ID="lblAllocationGroup" runat="server" Text="Allocation Group:" Font-Names="Verdana"></asp:Label></td>
                     <td style="height: 25px">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:DropDownList Font-Names="Verdana" ID="ddlAllocationGroup" runat="server" AutoPostBack="True"
-                            OnSelectedIndexChanged="ddlAllocationGroup_SelectedIndexChanged" Width="250px">
+                            OnSelectedIndexChanged="ddlAllocationGroup_SelectedIndexChanged" Width="300px">
                         </asp:DropDownList>
                         &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlAllocationGroup" ErrorMessage="Select Allocation Group">*</asp:RequiredFieldValidator>
                         </td>
                     <td style="width: 4px; height: 25px"></td>
+                    </ContentTemplate>
+                  </asp:UpdatePanel>
                 </tr>
                 <tr>
                     <td>
@@ -70,7 +89,7 @@
                     </td>
                     <td>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:TextBox ID="txtasOfDate" runat="server" Width="119px" AutoPostBack="true" TabIndex="4" OnTextChanged="txtasOfDate_TextChanged"></asp:TextBox>
+                        <asp:TextBox ID="txtasOfDate" runat="server" Width="100px" AutoPostBack="true" TabIndex="4" OnTextChanged="txtasOfDate_TextChanged"></asp:TextBox>
                         &nbsp;<a onclick="showCalendarControl(txtasOfDate)"><img id="img1" alt="" border="0" src="images/calander.png" /></a>
                     </td>
 
