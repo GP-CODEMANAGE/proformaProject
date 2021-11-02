@@ -69,7 +69,7 @@ public partial class Proforma : System.Web.UI.Page
 
     protected void btnsubmit_Click(object sender, EventArgs e)
     {
-        string sqlstr = "exec [TransactionLoad_DB].[dbo].[SP_EXCEL_FORMULA_TEST]";
+        string sqlstr = "EXEC [SP_R_PROFORMA] @HouseholdName = 'Adams Family',@AsofDate = '30-Jun-2020',@GreshamAdvisedFlagTxt = 'TIA'";
         DataSet ds1=clsDB.getDataSet(sqlstr);
         ExportDataSetToExcel(ds1);
     }
@@ -84,34 +84,48 @@ public partial class Proforma : System.Web.UI.Page
 
         Workbook book = new Workbook();
         book.Version = ExcelVersion.Version2016;
-        book.LoadFromFile(@"C:\Saurabh\NEW PROFORMA TEMPLATE TEST.xlsx");
+        book.LoadFromFile(@"C:\Users\BharathKumar\Desktop\Test\NEW PROFORMA TEMPLATE TEST.xlsx");
         Worksheet sheet = book.Worksheets[0];
 
-        //Export datatable to excel
-        DataTable dt1 = ds.Tables[0];
 
-        
-        for(int i = 0;i<dt1.Rows.Count;i++)
+        //Export datatable to excel
+        DataTable dt0 = ds.Tables[0];
+        DataTable dt1 = ds.Tables[1];
+
+        // Formating date stamp
+        sheet.Range["B4"].Text = dt0.Rows[0][0].ToString();
+        sheet.Range["B4"].NumberFormat = "mm-dd-yyyy";
+
+        sheet.Range["C14"].Text = dt0.Rows[0][0].ToString();
+        sheet.Range["C14"].NumberFormat = "mm-dd-yyyy";
+
+        sheet.Range["F14"].Text = dt0.Rows[0][1].ToString();
+        sheet.Range["F14"].NumberFormat = "mm-dd-yyyy";
+
+        sheet.Range["I14"].Text = dt0.Rows[0][2].ToString();
+        sheet.Range["I14"].NumberFormat = "mm-dd-yyyy";
+
+        //Dynamically updating the data into the cells
+        for (int i = 0;i<dt1.Rows.Count;i++)
         {
             int j = 0;
             string sval = dt1.Rows[i][j].ToString();
-            //string cval = dt1.Rows[i][j+3].ToString();
-            if (sval.Contains("C"))
+            string cellFormat = dt1.Rows[i][2].ToString();
+            if (cellFormat=="Currency")
             {
                 sheet.Range[sval].NumberValue = double.Parse(dt1.Rows[i][j + 1].ToString());
                 sheet.Range[sval].NumberFormat = "$#,##0.00";
             }
-            else
+            else if(cellFormat=="Number")
             {
                 sheet.Range[sval].NumberValue = double.Parse(dt1.Rows[i][j + 1].ToString());
                 sheet.Range[sval].NumberFormat = "0.0";
             }
         }
-
         book.CalculateAllValue();
 
-        book.SaveToFile(@"C:\Saurabh\NEW PROFORMA TEMPLATE TEST.xlsx", ExcelVersion.Version2016);
+        book.SaveToFile(@"C:\Users\BharathKumar\Desktop\Test\NEW PROFORMA TEMPLATE TEST RESULT.xlsx", ExcelVersion.Version2016);
 
-        System.Diagnostics.Process.Start(@"C:\Saurabh\NEW PROFORMA TEMPLATE TEST.xlsx");
+       // System.Diagnostics.Process.Start(@"C:\Saurabh\NEW PROFORMA TEMPLATE TEST.xlsx");
     }
 }
