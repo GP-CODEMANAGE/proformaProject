@@ -94,16 +94,16 @@ public partial class Proforma : System.Web.UI.Page
 
         // Formating date stamp
         sheet.Range["B4"].Text = dt0.Rows[0][0].ToString();
-        sheet.Range["B4"].NumberFormat = "mm-dd-yyyy";
+        sheet.Range["B4"].NumberFormat = "dd-mm-yyyy";  
 
         sheet.Range["C14"].Text = dt0.Rows[0][0].ToString();
-        sheet.Range["C14"].NumberFormat = "mm-dd-yyyy";
+        sheet.Range["C14"].NumberFormat = "dd-mm-yyyy";
 
         sheet.Range["F14"].Text = dt0.Rows[0][1].ToString();
-        sheet.Range["F14"].NumberFormat = "mm-dd-yyyy";
+        sheet.Range["F14"].NumberFormat = "dd-mm-yyyy";
 
         sheet.Range["I14"].Text = dt0.Rows[0][2].ToString();
-        sheet.Range["I14"].NumberFormat = "mm-dd-yyyy";
+        sheet.Range["I14"].NumberFormat = "dd-mm-yyyy";
 
         //Dynamically updating the data into the cells
         for (int i = 0;i<dt1.Rows.Count;i++)
