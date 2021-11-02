@@ -95,8 +95,20 @@ public partial class Proforma : System.Web.UI.Page
         {
             int j = 0;
             string sval = dt1.Rows[i][j].ToString();
-            sheet.Range[sval].Text = dt1.Rows[i][j + 1].ToString();
+            //string cval = dt1.Rows[i][j+3].ToString();
+            if (sval.Contains("C"))
+            {
+                sheet.Range[sval].NumberValue = double.Parse(dt1.Rows[i][j + 1].ToString());
+                sheet.Range[sval].NumberFormat = "$#,##0.00";
+            }
+            else
+            {
+                sheet.Range[sval].NumberValue = double.Parse(dt1.Rows[i][j + 1].ToString());
+                sheet.Range[sval].NumberFormat = "0.0";
+            }
         }
+
+        book.CalculateAllValue();
 
         book.SaveToFile(@"C:\Saurabh\NEW PROFORMA TEMPLATE TEST.xlsx", ExcelVersion.Version2016);
 
